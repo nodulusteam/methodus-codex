@@ -1,0 +1,34 @@
+<head> </head>
+<body>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, maxTextSize: 90000, padding: '1000px', diagramPadding: 100 });
+    </script>
+    <style>
+        .mermaid {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+    <pre class="mermaid">
+    ---
+    title: App
+    config:
+        textHeight: 100
+        theme: base
+        themeVariables:
+            primaryColor: "#FFF"
+    ---
+    classDiagram
+<%for(const moduleKey of Object.keys(data.modules)){
+    if(data.relations[moduleKey]){
+    for(const targetKey of Object.keys(data.relations[moduleKey])){%><%- include('codemap/components/relation', {data: {target:targetKey ,source:moduleKey}}) %><%}}}%>
+<%for(const classProt of Object.values(data.modules)){%><%- include('codemap/components/module', {data: classProt}) %><%}%>
+<%for(const classProt of Object.values(data.controllers)){%><%- include('codemap/components/controller', {data: classProt}) %><%}%>
+    
+
+
+</pre
+    >
+</body>

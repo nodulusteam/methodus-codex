@@ -1,0 +1,4 @@
+*
+!dist/**/*
+!views/**/*
+!package.json

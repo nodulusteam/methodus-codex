@@ -1,0 +1,119 @@
+<html>
+    <head>
+        <script type="module">
+            import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true, maxTextSize: 90000, diagramPadding: 10 });
+        </script>
+
+        <script
+            src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"
+        ></script>
+        <%- include('jquery.svg.pan.zoom.js',{}) %>
+
+        <script>
+            $(function () {
+                setTimeout(function () {
+                    var options = {
+                        events: {
+                            mouseWheel: true, // enables mouse wheel zooming events
+                            doubleClick: true, // enables double-click to zoom-in events
+                            drag: true, // enables drag and drop to move the SVG events
+                            dragCursor: 'move', // cursor to use while dragging the SVG
+                        },
+                        animationTime: 300, // time in milliseconds to use as default for animations. Set 0 to remove the animation
+                        zoomFactor: 0.25, // how much to zoom-in or zoom-out
+                        maxZoom: 3, //maximum zoom in, must be a number bigger than 1
+                        panFactor: 100, // how much to move the viewBox when calling .panDirection() methods
+                    };
+                    var svgPanZoom = $('svg').svgPanZoom(options);
+
+                    svgPanZoom.events.mouseWheel = false;
+                    $('#zoomInBtn').click(function () {
+                        svgPanZoom.zoomIn();
+                    });
+                    $('#zoomOutBtn').click(function () {
+                        svgPanZoom.zoomOut();
+                    });
+                }, 5000);
+            });
+        </script>
+    </head>
+    <body>
+        <style>
+            body, html{
+                height: 100%;
+            }
+
+            body > pre > svg {
+                height: 100%;
+            }
+            .mermaid {
+                width: 100%;
+                height: 100%;
+            }
+            <%for(let i=0;i<colors.length;i++){%>
+                .section-<%-i%> line .section-<%-i%> path,.section-<%-i%> polygon,.section-<%-i%> rect {
+                    stroke: <%-colors[i]%>;
+                    stroke-width: 2;
+                }
+            <%}%>
+
+            .controller rect {
+                fill: rgb(199, 155, 197) !important;
+            }
+            .provider rect {
+                fill: rgb(163, 214, 238) !important;
+            }
+            .module polygon {
+                fill: rgb(238, 205, 163) !important;
+            }
+        </style>
+        <button id="zoomInBtn" class="btn btn-primary">+</button>
+        <button id="zoomOutBtn" class="btn btn-primary">-</button>
+        <pre class="mermaid">
+---
+title: App
+config:
+    textHeight: 100
+    theme: base
+    themeVariables:
+        primaryColor: "#FFF"
+---
+mindmap
+  root((AppModule))
+  <%for(const classProt of Object.values(data.modules)){%>
+    <%-classProt.name%>{{<%-classProt.name%>}}
+    :::module
+    <%if(data.relations[classProt.name]){
+        for(const relation of Object.values(data.relations[classProt.name])){%>
+        <%if(data.controllers[relation.name]){%>
+            <%-relation.name%>[<%-relation.name%>]
+            :::controller
+            <%if(data.relations[relation.name]){
+                for(const childRelation of Object.values(data.relations[relation.name])){%>
+            <%if(data.providers[childRelation.name]){%>
+                <%-childRelation.name%>(<%-childRelation.name%>)
+                :::provider
+
+                <%if(data.relations[childRelation.name]){
+                    for(const grandChildRelation of Object.values(data.relations[childRelation.name])){%>
+                <%if(data.providers[grandChildRelation.name]){%>
+                    <%-grandChildRelation.name%>(<%-grandChildRelation.name%>)
+                    :::provider
+                    <%}%>
+                <%}}%>
+                <%}%>
+            <%}}%>
+        <%}%>
+        
+        
+    <%}}}%>  
+    
+ 
+
+</pre
+        >
+    </body>
+</html>

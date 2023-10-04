@@ -1,0 +1,10 @@
+class <%-classProt.name%>{<%for(const prop of classProt.properties){%>
+    +String <%-prop.name%><%}%><%for(const method of classProt.methods){%>
+    +<%=method.name%>()<%}%><%for(const parameter of classProt.parameters){%>
+    <%=parameter.name%>()<%}%>
+  }
+
+  <%for(const classProt of Object.values(data.controllers)){%><%- include('controller', {data: classProt}) %><%}%>
+
+
+<%for(const classProt of Object.values(data.providers)){%><%- include('provider', {data: classProt}) %><%}%>
