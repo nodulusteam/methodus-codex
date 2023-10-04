@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-// const MapperService = require('@methodus/codex/dist/code-map/services/mapper.service').MapperService;
-// const GenerateService = require('@methodus/codex/dist/code-map/services/generate.service').GenerateService;
+const MapperService = require('@methodus/codex/dist/code-map/services/mapper.service').MapperService;
+const GenerateService = require('@methodus/codex/dist/code-map/services/generate.service').GenerateService;
 
-import { MapperService } from './code-map/services/mapper.service';
-import { GenerateService } from './code-map/services/generate.service';
+// import { MapperService } from './code-map/services/mapper.service';
+// import { GenerateService } from './code-map/services/generate.service';
 
 import fs from 'fs';
 import open from 'open';
@@ -69,6 +69,7 @@ if (!process.argv[2]) {
             encoding: 'utf8',
         });
         console.info(`Saved to ${outputPath}`);
+
         open(outputPath);
     });
 }
