@@ -17,7 +17,7 @@
         "cli:flowmap": "ts-node ./src/cli.ts flowmap",
         "cli": "ts-node ./src/cli.ts",
         "ci:build": "yarn && yarn build",
-        "ci:publish": "yarn bump && yarn release",
+        
         "bump": "npm version patch --no-push",
         "release": "npm commit-version | exit 0 && npm publish",
         "commit-version": "git add . && git commit -m \"chore(release): publish `node -p 'require(\"./package.json\").version'`\""
