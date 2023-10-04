@@ -5,6 +5,17 @@
     "description": "Code visualization tool",
     "type": "commonjs",
     "main": "index.js",
+    "bugs": {
+        "url": "https://github.com/nodulusteam/methodus-codex/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/nodulusteam/methodus-codex.git"
+    },
+    "keywords": [
+        "Code visualization",
+        "Code analyzer"
+    ],
     "bin": {
         "codex": "./dist/cli.js"
     },
