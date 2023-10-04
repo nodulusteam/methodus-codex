@@ -1,8 +1,8 @@
 {
     "name": "@methodus/codex",
     "version": "0.0.6",
-    "author": "",
-    "description": "",
+    "author": "nodulusteam",
+    "description": "Code visualization tool",
     "type": "commonjs",
     "main": "index.js",
     "bin": {
@@ -11,25 +11,20 @@
     "scripts": {
         "start": "nest start --debug=7071 --watch",
         "build": "nest build && chmod u+x ./dist/cli.js",
-        "create": "ts-node src/index.ts /Users/rb136m/Documents/git/teamup/teamup-ms-engineering",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "cli:mindmap": "ts-node ./src/cli.ts mindmap /Users/rb136m/Documents/github/evinature/evidata-gateway/server",
+        "cli:mindmap": "ts-node ./src/cli.ts mindmap",
         "cli:codemap": "ts-node ./src/cli.ts codemap",
         "cli:flowmap": "ts-node ./src/cli.ts flowmap",
-        "cli": "ts-node ./src/cli.ts"
+        "cli": "ts-node ./src/cli.ts",
+        "ci:build": "yarn && yarn build",
+        "bump": "npm version patch --no-push",
+        "release": "npm commit-version | exit 0 && npm publish ",
+        "commit-version": "git add . && git commit -m \"chore(release): publish `node -p 'require(\"./package.json\").version'`\""
     },
-    "license": "ISC",
+    "license": "UNLICENSED",
     "dependencies": {
-        "@nestjs/cli": "^9.2.0",
-        "@nestjs/common": "^9.4.0",
-        "@nestjs/config": "^2.3.1",
-        "@nestjs/core": "^9.4.0",
-        "@nestjs/event-emitter": "^1.4.1",
-        "@nestjs/platform-express": "^9.4.0",
         "boxen": "5.1.2",
         "chalk": "4.1.2",
-        "class-transformer": "^0.5.1",
-        "class-validator": "^0.14.0",
         "ejs": "^3.1.9",
         "figlet": "^1.6.0",
         "open": "8.4.2",
@@ -38,6 +33,14 @@
         "uniqolor": "^1.1.0"
     },
     "devDependencies": {
+        "class-transformer": "^0.5.1",
+        "class-validator": "^0.14.0",
+        "@nestjs/cli": "^9.2.0",
+        "@nestjs/common": "^9.4.0",
+        "@nestjs/config": "^2.3.1",
+        "@nestjs/core": "^9.4.0",
+        "@nestjs/event-emitter": "^1.4.1",
+        "@nestjs/platform-express": "^9.4.0",
         "ts-node": "^10.9.1",
         "@types/boxen": "^3.0.1",
         "@types/chalk": "^2.2.0",
